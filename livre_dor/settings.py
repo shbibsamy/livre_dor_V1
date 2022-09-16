@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,8 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'n+i3jq=#hdz(h_lh)9xg-c!8ybh1_t=fkkz9o+ik67r2p*&k4e'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,6 +37,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'commentaire',
+    'environ',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
