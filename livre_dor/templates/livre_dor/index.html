@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+
+<img src="{% static 'assets/img/logo-id-formation.png' %}" alt=""><h1>Livre d'Or</h1>
+
+{% endblock header %}
+
+{% block main %}
+<span class="message">{{ message }}</span>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ formulaire.error }}
+    <fieldset>
+        <legend>
+            <span>Merci de laisser un message sympatique.</span>
+        </legend>
+        <div class="email">
+            <span class="email-label">{{ formulaire.email.label }}</span>
+            <span class="email-input">{{ formulaire.email }}</span>
+        </div>
+        <div class="commentaire">
+            <span class="commentaire-label">{{ formulaire.contenu.label }}</span>
+            <span class="commentaire-input">{{ formulaire.contenu }}</span>
+        </div>
+    </fieldset>
+    <input type="submit">
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Visiteur
+            </th>
+            <th>
+                Date de visite
+            </th>
+            <th>
+                Message
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for commentaire in data %}
+        <tr>
+            <td class="tableau-visiteur">
+                {{ commentaire.email}}
+            </td>
+            <td class="tableau-date">
+                {{ commentaire.date}}
+            </td>
+            <td>
+                {{ commentaire.contenu}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+{% endblock main %}
